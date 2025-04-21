@@ -1,3 +1,4 @@
+uvicorn
 requests
 bs4
 langchain
