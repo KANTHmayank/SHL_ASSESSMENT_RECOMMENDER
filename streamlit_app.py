@@ -6,7 +6,7 @@ st.set_page_config(page_title="SHL Assessment Recommender")
 
 @st.cache_resource
 def load_retriever():
-    embedder = OpenAIEmbeddings(model="text-embedding-3-small")
+    embedder = OpenAIEmbeddings(model="text-embedding-3-small", openai_api_type=st.secrets["OPENAI_API_KEY"])
     db = FAISS.load_local("faiss_index", embedder, allow_dangerous_deserialization=True)
     return db.as_retriever(search_kwargs={"k": 10})
 
