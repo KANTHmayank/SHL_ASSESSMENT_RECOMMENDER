@@ -7,3 +7,6 @@ fastapi
 pydantic
 streamlit
 openai
+faiss-cpu
+lxml
+beautifulsoup4
