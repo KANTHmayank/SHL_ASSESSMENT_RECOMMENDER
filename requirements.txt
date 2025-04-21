@@ -1,0 +1,7 @@
+requests
+bs4
+langchain
+langchain-community
+fastapi
+pydantic
+streamlit
