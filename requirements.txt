@@ -10,3 +10,4 @@ openai
 faiss-cpu
 lxml
 beautifulsoup4
+tiktoken
