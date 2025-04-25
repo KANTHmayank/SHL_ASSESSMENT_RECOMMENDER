@@ -3,10 +3,16 @@ import json
 import numpy as np
 import re
 from langchain.embeddings import OpenAIEmbeddings
+import os
 
 # --- Config ---
 st.set_page_config(page_title="SHL Assessment Recommender", layout="wide")
 
+if "OPENAI_API_KEY" in st.secrets:
+    openai_api_key = st.secrets["OPENAI_API_KEY"]
+else:
+    openai_api_key = os.getenv("OPENAI_API_KEY")
+    
 # --- Constants ---
 TEST_TYPE_MAP = {
     "A": "Ability and aptitude",
@@ -32,7 +38,7 @@ metadata, texts = load_data()
 # --- Embeddings ---
 @st.cache_resource
 def embed_docs(texts):
-    embedder = OpenAIEmbeddings(model="text-embedding-3-small", openai_api_key=st.secrets["OPENAI_API_KEY"])
+    embedder = OpenAIEmbeddings(model="text-embedding-3-small", openai_api_key=openai_api_key)
     embs = np.array(embedder.embed_documents(texts))
     embs /= np.linalg.norm(embs, axis=1, keepdims=True)
     return embedder, embs
