@@ -5,6 +5,9 @@ import numpy as np
 from langchain.embeddings import OpenAIEmbeddings
 import re
 import streamlit as st
+import os
+
+openai_api_key = os.getenv("OPENAI_API_KEY")
 
 app = FastAPI()
 
@@ -15,7 +18,7 @@ with open("data/assessments4.json", "r") as f:
 texts = [f"{item['name']}\n\n{item['description']}" for item in metadata]
 
 # ====== 2. Build vector embeddings ======
-embedder = OpenAIEmbeddings(model="text-embedding-3-small", openai_api_key=st.secrets["OPENAI_API_KEY"])
+embedder = OpenAIEmbeddings(model="text-embedding-3-small", openai_api_key=openai_api_key)
 doc_embs = np.array(embedder.embed_documents(texts))
 doc_embs /= np.linalg.norm(doc_embs, axis=1, keepdims=True)
 
