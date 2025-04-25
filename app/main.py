@@ -4,10 +4,11 @@ import json
 import numpy as np
 from langchain.embeddings import OpenAIEmbeddings
 import re
-import streamlit as st
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
-openai_api_key = os.getenv("OPENAI_API_KEY") or st.secrets["OPENAI_API_KEY"]
+openai_api_key=os.getenv("OPENAI_API_KEY")
 
 app = FastAPI()
 
