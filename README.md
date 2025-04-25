@@ -17,7 +17,7 @@ An AI-powered recommendation engine for SHL assessments. It lets hiring managers
 
 ## 📁 Project Structure
 
-shl-recommender/ └── main.py # FastAPI backend ├── data/ │ └── assessments.json # Scraped assessment metadata ├── streamlit_app.py # UI for querying ├── scrape.py # SHL catalog scraper ├── requirements.txt └── README.md
+shl-recommender/ ├── app/ │ └── main.py # FastAPI backend ├── data/ │ └── assessments.json # Scraped assessment metadata ├── streamlit_app.py # UI for querying ├── scrape.py # SHL catalog scraper ├── requirements.txt └── README.md
 
 ## 🧩 Technologies Used
 
