@@ -13,7 +13,7 @@ openai_api_key=os.getenv("OPENAI_API_KEY")
 app = FastAPI()
 
 # ====== 1. Load scraped data ======
-with open("data/assessments4.json", "r") as f:
+with open("data/assessments.json", "r") as f:
     metadata = json.load(f)
 
 texts = [f"{item['name']}\n\n{item['description']}" for item in metadata]
