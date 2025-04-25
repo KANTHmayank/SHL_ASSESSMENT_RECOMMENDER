@@ -1,36 +1,59 @@
 # SHL Assessment Recommendation System
 
-An end‑to‑end pipeline that scrapes SHL’s product catalog, builds an embedding‑based vector index with OpenAI + FAISS via LangChain, and serves recommendations via FastAPI or a self‑contained Streamlit app.
+An AI-powered recommendation engine for SHL assessments. It lets hiring managers enter free-form queries and returns relevant SHL tests using OpenAI embeddings and semantic search.
 
 ---
 
 ## 🚀 Features
 
-- **Scraper** (`scrape_shl_full.py`):  
-  • Collects every “Pre‑packaged Job” and “Individual Test” product URL (handles pagination)  
-  • Visits each detail page and extracts: name, URL, description, duration (mins), remote‑testing flag, adaptive‑IRT flag  
-  • Outputs `data/assessments.json`
-
-- **Ingest & Index** (`ingest_and_index.py`):  
-  • Loads `data/assessments.json`  
-  • Wraps each record as a LangChain `Document`  
-  • Creates a FAISS vector store using OpenAI embeddings (`text-embedding-3-small`)  
-  • Persists index under `faiss_index/`
-
-- **API** (`app/main.py`, `app/model.py`):  
-  • `GET /health` → `{ "status": "ok" }`  
-  • `POST /recommend` → `{ "recommendations": [ { name, url, duration_minutes, remote_testing, adaptive_irt }, … ] }`  
-  • Powered by FastAPI + Uvicorn
-
-- **UI (optional)** (`streamlit_app.py`):  
-  • Self‑contained Streamlit app  
-  • Query box + “Get Recommendations” button  
-  • Displays results with metadata and links
+- 🔍 Full catalog scraping from SHL product pages
+- 📊 Metadata extraction: name, description, duration, test types, remote/IRT
+- 🤖 Embedding + semantic retrieval using OpenAI
+- ⚡ FastAPI API endpoint (`/recommend`)
+- 🎯 Streamlit UI to query interactively
+- 🧠 Filters on duration, remote availability, and test types (like cognitive, personality)
 
 ---
 
-## 📋 Project Structure
+## 📁 Project Structure
 
-shl-recommender/ ├── data/ │ └── assessments4.json # scraper output ├── faiss_index/ # vector store (generated) ├── app/ │ ├── init.py │ ├── main.py # FastAPI server │ └── model.py # retriever loader ├── scrape.py # production scraper ├── ingest_and_index.py # embedding + FAISS indexer ├── streamlit_app.py # optional Streamlit UI ├── requirements.txt # dependencies ├── one-pager.pdf # concise approach summary └── README.md # this file
+shl-recommender/ └── main.py # FastAPI backend ├── data/ │ └── assessments.json # Scraped assessment metadata ├── streamlit_app.py # UI for querying ├── scrape.py # SHL catalog scraper ├── requirements.txt └── README.md
+
+## 🧩 Technologies Used
+
+- **Scraping**: `requests`, `beautifulsoup4`
+- **Semantic Search**: `OpenAI`, `LangChain`, `NumPy`
+- **Backend**: `FastAPI`, `Uvicorn`
+- **Frontend**: `Streamlit`
+- **Hosting**: `Render`, `Streamlit Cloud`
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1. Clone Repo
+git clone https://github.com/YOUR_USERNAME/shl-recommender.git
+cd shl-recommender
+
+2. Install Dependencies
+   pip install -r requirements.txt
+
+3. Set OpenAI API Key
+   openai.api_key=st.secrets["OPENAI_API_KEY"]
+
+🧪 Run Locally
+FastAPI Server:
+uvicorn app.main:app --reload
+
+
+Test it with:
+curl -X POST http://localhost:8000/recommend \
+     -H "Content-Type: application/json" \
+     -d '{"query":"30-minute cognitive test for remote analysts"}'
+
+Streamlit UI:
+streamlit run streamlit_app.py
+
+
 
 
