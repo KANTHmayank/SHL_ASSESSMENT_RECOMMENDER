@@ -9,3 +9,4 @@ beautifulsoup4
 lxml
 tiktoken
 langchain-community
+python-dotenv
