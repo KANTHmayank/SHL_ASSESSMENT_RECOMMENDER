@@ -7,3 +7,4 @@ streamlit
 requests
 beautifulsoup4
 lxml
+langchain-community
