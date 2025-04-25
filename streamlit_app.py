@@ -8,10 +8,7 @@ import os
 # --- Config ---
 st.set_page_config(page_title="SHL Assessment Recommender", layout="wide")
 
-if "OPENAI_API_KEY" in st.secrets:
-    openai_api_key = st.secrets["OPENAI_API_KEY"]
-else:
-    openai_api_key = os.getenv("OPENAI_API_KEY")
+openai_api_key =  os.getenv("OPENAI_API_KEY") or st.secrets.get("OPENAI_API_KEY") 
     
 # --- Constants ---
 TEST_TYPE_MAP = {
