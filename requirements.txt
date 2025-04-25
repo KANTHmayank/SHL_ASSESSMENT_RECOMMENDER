@@ -7,4 +7,5 @@ streamlit
 requests
 beautifulsoup4
 lxml
+tiktoken
 langchain-community
