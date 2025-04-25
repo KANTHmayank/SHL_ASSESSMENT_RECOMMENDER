@@ -40,6 +40,10 @@ class Query(BaseModel):
 
 # ====== 4. Endpoints ======
 
+@app.get("/recommend")
+async def redirect_to_docs():
+    return RedirectResponse(url="/docs")
+    
 @app.get("/health")
 def health():
     return {"status": "ok"}
