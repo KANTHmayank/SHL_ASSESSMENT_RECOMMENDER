@@ -7,7 +7,7 @@ import re
 import streamlit as st
 import os
 
-openai_api_key = os.getenv("OPENAI_API_KEY")
+openai_api_key = os.getenv("OPENAI_API_KEY") or st.secrets["OPENAI_API_KEY"]
 
 app = FastAPI()
 
