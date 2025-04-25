@@ -25,7 +25,7 @@ TEST_TYPE_MAP = {
 # --- Load data ---
 @st.cache_data
 def load_data():
-    with open("data/assessments4.json", "r") as f:
+    with open("data/assessments.json", "r") as f:
         metadata = json.load(f)
     texts = [f"{item['name']}\n\n{item['description']}" for item in metadata]
     return metadata, texts
