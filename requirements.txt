@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+openai
+langchain
+numpy
+streamlit
+requests
+beautifulsoup4
+lxml
